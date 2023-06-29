@@ -1,8 +1,6 @@
-import 'dotenv/config';
+import 'dotenv/config'
 
-const {
-  DB_HOST, DB_PORT = 5432, DB_NAME, DB_USER, DB_PASSWORD,
-} = process.env;
+const { DB_HOST, DB_PORT = 5432, DB_NAME, DB_USER, DB_PASSWORD } = process.env
 
 const defaultConfig = {
   dialect: 'postgres',
@@ -13,20 +11,20 @@ const defaultConfig = {
   host: DB_HOST,
   port: Number(DB_PORT),
   define: {
-    paranoid: true,
-  },
-};
+    paranoid: true
+  }
+}
 
 export const development = {
-  ...defaultConfig,
-};
+  ...defaultConfig
+}
 
 export const test = {
   ...defaultConfig,
-  logging: false,
-};
+  logging: false
+}
 
 export const production = {
   ...defaultConfig,
-  logging: false,
-};
+  logging: false
+}

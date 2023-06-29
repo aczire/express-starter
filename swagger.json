@@ -1,539 +1,573 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "description" : "Documantation of express starter api.",
-    "version" : "1.0.0",
-    "title" : "Express Starter API",
-    "contact" : {
-      "email" : "mucahitnezir@gmail.com"
+  "swagger": "2.0",
+  "info": {
+    "description": "Documantation of HCA Day of Assignments api.",
+    "version": "1.0.0",
+    "title": "HCA Day of Assignments API",
+    "contact": {
+      "email": "jimson.james@hcahealthcare.com"
     },
-    "license" : {
-      "name" : "MIT",
-      "url" : "https://github.com/mucahitnezir/express-starter/blob/master/LICENSE"
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/HCAATPI/gcp-ati-hdo-api/blob/master/LICENSE"
     }
   },
-  "securityDefinitions" : {
-    "bearer" : {
-      "type" : "apiKey",
-      "name" : "Authorization",
-      "in" : "header",
-      "description" : "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\""
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\""
     }
   },
-  "tags" : [ {
-    "name" : "auth"
-  }, {
-    "name" : "tweet"
-  } ],
-  "paths" : {
-    "/auth/register" : {
-      "post" : {
-        "summary" : "Create new user",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "object",
-            "required" : [ "firstName", "lastName", "email", "password" ],
-            "properties" : {
-              "firstName" : {
-                "type" : "string"
-              },
-              "lastName" : {
-                "type" : "string"
-              },
-              "email" : {
-                "type" : "string"
-              },
-              "password" : {
-                "type" : "string"
+  "tags": [
+    {
+      "name": "auth"
+    },
+    {
+      "name": "staff"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Create new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["firstName", "lastName", "email", "password"],
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
               }
             }
           }
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/TokenResponse"
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
             }
           },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "schema" : {
-              "$ref" : "#/definitions/UnprocessableEntityResponse"
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityResponse"
             }
           }
         },
-        "tags" : [ "auth" ],
-        "description" : "Create new user"
+        "tags": ["auth"],
+        "description": "Create new user"
       }
     },
-    "/auth/login" : {
-      "post" : {
-        "summary" : "Login",
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "object",
-            "required" : [ "email", "password" ],
-            "properties" : {
-              "email" : {
-                "type" : "string"
-              },
-              "password" : {
-                "type" : "string"
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["email", "password"],
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
               }
             }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/TokenResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
             }
           },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "schema" : {
-              "$ref" : "#/definitions/UnprocessableEntityResponse"
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityResponse"
             }
           }
         },
-        "tags" : [ "auth" ],
-        "description" : "Login"
+        "tags": ["auth"],
+        "description": "Login"
       }
     },
-    "/auth/me" : {
-      "get" : {
-        "summary" : "Fetch current user",
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Get current user info",
-            "schema" : {
-              "$ref" : "#/definitions/User"
+    "/auth/me": {
+      "get": {
+        "summary": "Fetch current user",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get current user info",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           },
-          "401" : {
-            "description" : "Unauthorized",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
-        "tags" : [ "auth" ],
-        "description" : "Fetch current user"
+        "tags": ["auth"],
+        "description": "Fetch current user"
       },
-      "put" : {
-        "summary" : "Update current user",
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "parameters" : [ {
-          "name" : "model",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "object",
-            "properties" : {
-              "firstName" : {
-                "type" : "string"
-              },
-              "lastName" : {
-                "type" : "string"
-              },
-              "email" : {
-                "type" : "string"
+      "put": {
+        "summary": "Update current user",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                }
               }
             }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SuccessResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
             }
           },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "401" : {
-            "description" : "Unauthorized",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "schema" : {
-              "$ref" : "#/definitions/UnprocessableEntityResponse"
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityResponse"
             }
           }
         },
-        "tags" : [ "auth" ],
-        "description" : "Update current user"
+        "tags": ["auth"],
+        "description": "Update current user"
       },
-      "delete" : {
-        "summary" : "Delete current user",
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
+      "delete": {
+        "summary": "Delete current user",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
           },
-          "401" : {
-            "description" : "Unauthorized",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
-        "tags" : [ "auth" ],
-        "description" : "Delete current user"
+        "tags": ["auth"],
+        "description": "Delete current user"
       }
     },
-    "/auth/me/password" : {
-      "put" : {
-        "summary" : "Update password of current user",
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "object",
-            "required" : [ "current", "password" ],
-            "properties" : {
-              "current" : {
-                "type" : "string"
-              },
-              "password" : {
-                "type" : "string"
+    "/auth/me/password": {
+      "put": {
+        "summary": "Update password of current user",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["current", "password"],
+              "properties": {
+                "current": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
               }
             }
           }
-        } ],
-        "description" : "Update password of current user",
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/SuccessResponse"
+        ],
+        "description": "Update password of current user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SuccessResponse"
             }
           },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "401" : {
-            "description" : "Unauthorized",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "schema" : {
-              "$ref" : "#/definitions/UnprocessableEntityResponse"
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityResponse"
             }
           }
         },
-        "tags" : [ "auth" ]
+        "tags": ["auth"]
       }
     },
-    "/tweets" : {
-      "get" : {
-        "summary" : "List all tweets with pagination",
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "parameters" : [ {
-          "in" : "query",
-          "name" : "page",
-          "type" : "integer",
-          "required" : false,
-          "description" : "Page"
-        }, {
-          "in" : "query",
-          "name" : "perPage",
-          "type" : "integer",
-          "required" : false,
-          "description" : "Per page"
-        } ],
-        "tags" : [ "tweet" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/TweetList"
+    "/staffs": {
+      "get": {
+        "summary": "List all staffs with pagination",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "description": "Page"
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "type": "integer",
+            "required": false,
+            "description": "Per page"
+          }
+        ],
+        "tags": ["staff"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaffList"
             }
           }
         }
       },
-      "post" : {
-        "summary" : "Create new tweet",
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "parameters" : [ {
-          "name" : "body",
-          "in" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "object",
-            "required" : [ "tweet" ],
-            "properties" : {
-              "tweet" : {
-                "type" : "string"
+      "post": {
+        "summary": "Create new staff",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["staff"],
+              "properties": {
+                "staff": {
+                  "type": "string"
+                }
               }
             }
           }
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Tweet"
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Staff"
             }
           },
-          "400" : {
-            "description" : "Bad request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "schema" : {
-              "$ref" : "#/definitions/UnprocessableEntityResponse"
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityResponse"
             }
           }
         },
-        "tags" : [ "tweet" ],
-        "description" : "Create new tweet"
+        "tags": ["staff"],
+        "description": "Create new staff"
       }
     },
-    "/tweets/{id}" : {
-      "get" : {
-        "summary" : "Get tweet by id",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "id",
-          "type" : "integer",
-          "required" : true,
-          "description" : "Tweet id"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Tweet"
+    "/staffs/{id}": {
+      "get": {
+        "summary": "Get staff by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "Staff id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Staff"
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
-        "tags" : [ "tweet" ],
-        "description" : "Get tweet by id"
+        "tags": ["staff"],
+        "description": "Get staff by id"
       },
-      "delete" : {
-        "summary" : "Delete tweet by id",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "id",
-          "type" : "integer",
-          "required" : true,
-          "description" : "Tweet id"
-        } ],
-        "security" : [ {
-          "bearer" : [ ]
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "OK"
+      "delete": {
+        "summary": "Delete staff by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "Staff id"
+          }
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
           },
-          "401" : {
-            "description" : "Unauthorized",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
-        "tags" : [ "tweet" ],
-        "description" : "Delete tweet by id"
+        "tags": ["staff"],
+        "description": "Delete staff by id"
       }
     }
   },
-  "definitions" : {
-    "User" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer"
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
         },
-        "firstName" : {
-          "type" : "string"
+        "firstName": {
+          "type": "string"
         },
-        "lastName" : {
-          "type" : "string"
+        "lastName": {
+          "type": "string"
         },
-        "email" : {
-          "type" : "string"
+        "email": {
+          "type": "string"
         },
-        "password" : {
-          "type" : "string"
+        "password": {
+          "type": "string"
         },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
-        "updatedAt" : {
-          "type" : "string",
-          "format" : "date-time"
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
-    "Tweet" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer"
+    "Staff": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
         },
-        "userId" : {
-          "type" : "integer"
+        "userId": {
+          "type": "integer"
         },
-        "tweet" : {
-          "type" : "string"
+        "staff": {
+          "type": "string"
         },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
-        "updatedAt" : {
-          "type" : "string",
-          "format" : "date-time"
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
-    "TweetList" : {
-      "type" : "object",
-      "properties" : {
-        "page" : {
-          "type" : "integer"
+    "StaffList": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer"
         },
-        "perPage" : {
-          "type" : "integer"
+        "perPage": {
+          "type": "integer"
         },
-        "totalPage" : {
-          "type" : "integer"
+        "totalPage": {
+          "type": "integer"
         },
-        "count" : {
-          "type" : "integer"
+        "count": {
+          "type": "integer"
         },
-        "rows" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Tweet"
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Staff"
           }
         }
       }
     },
-    "ErrorResponse" : {
-      "type" : "object",
-      "required" : [ "message" ],
-      "properties" : {
-        "message" : {
-          "type" : "string"
+    "ErrorResponse": {
+      "type": "object",
+      "required": ["message"],
+      "properties": {
+        "message": {
+          "type": "string"
         }
       }
     },
-    "SuccessResponse" : {
-      "type" : "object",
-      "properties" : {
-        "success" : {
-          "type" : "boolean",
-          "default" : true
+    "SuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "default": true
         }
       }
     },
-    "TokenResponse" : {
-      "type" : "object",
-      "properties" : {
-        "token" : {
-          "type" : "string"
+    "TokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
         },
-        "refreshToken" : {
-          "type" : "string"
+        "refreshToken": {
+          "type": "string"
         }
       }
     },
-    "UnprocessableEntityResponse" : {
-      "type" : "object",
-      "required" : [ "message", "errors" ],
-      "properties" : {
-        "message" : {
-          "type" : "string"
+    "UnprocessableEntityResponse": {
+      "type": "object",
+      "required": ["message", "errors"],
+      "properties": {
+        "message": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/UnprocessableEntityResponseItem"
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnprocessableEntityResponseItem"
           }
         }
       }
     },
-    "UnprocessableEntityResponseItem" : {
-      "type" : "object",
-      "properties" : {
-        "value" : {
-          "type" : "string"
+    "UnprocessableEntityResponseItem": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
         },
-        "msg" : {
-          "type" : "string"
+        "msg": {
+          "type": "string"
         },
-        "param" : {
-          "type" : "string"
+        "param": {
+          "type": "string"
         },
-        "location" : {
-          "type" : "string"
+        "location": {
+          "type": "string"
         }
       }
     }

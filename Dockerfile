@@ -1,5 +1,5 @@
 # Builder image
-FROM node:16-alpine AS builder
+FROM node:20-alpine AS builder
 
 COPY package.json ./app/
 COPY yarn.lock ./app/
@@ -13,7 +13,7 @@ COPY . .
 RUN yarn run build
 
 # Production image
-FROM node:16-alpine
+FROM node:20-alpine
 
 COPY package.json ./usr/src/app/
 COPY yarn.lock ./usr/src/app/

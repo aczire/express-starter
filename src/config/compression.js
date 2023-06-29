@@ -1,3 +1,3 @@
 export default {
-  level: 9,
-};
+  level: 9
+}

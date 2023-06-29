@@ -1,5 +1,5 @@
 {
-  "name": "express-starter",
+  "name": "gcp-ati-hdo-api",
   "env": {
     "NODE_ENV": {
       "description": "Environment where the application will run",
@@ -54,8 +54,8 @@
       "required": false
     },
     "DEFAULT_MAIL_SENDER": {
-      "description": "Default mail sander profile",
-      "value": "Express Starter <mail@example.com>"
+      "description": "Default mail sander profile for assignments completion notification",
+      "value": "HCA - DoA <mail@hcahealthcare.com>"
     }
   },
   "options": {

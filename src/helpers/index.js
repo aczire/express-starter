@@ -1,7 +1,4 @@
-import * as mailHelper from './mail';
-import * as tokenHelper from './token';
+import * as mailHelper from './mail'
+import * as tokenHelper from './token'
 
-export {
-  mailHelper,
-  tokenHelper,
-};
+export { mailHelper, tokenHelper }

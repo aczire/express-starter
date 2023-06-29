@@ -1,16 +1,16 @@
-import { Router } from 'express';
-import swaggerUi from 'swagger-ui-express';
+import { Router } from 'express'
+import swaggerUi from 'swagger-ui-express'
 
-import * as homeController from '@/controllers/home';
-import swaggerDocument from '../../swagger.json';
+import * as homeController from '@/controllers/home'
+import swaggerDocument from '../../swagger.json'
 
-const router = Router();
+const router = Router()
 
-router.get('/', homeController.index);
+router.get('/', homeController.index)
 
-router.get('/health', homeController.healthCheck);
+router.get('/health', homeController.healthCheck)
 
-router.use('/docs', swaggerUi.serve);
-router.get('/docs', swaggerUi.setup(swaggerDocument));
+router.use('/docs', swaggerUi.serve)
+router.get('/docs', swaggerUi.setup(swaggerDocument))
 
-export default router;
+export default router
